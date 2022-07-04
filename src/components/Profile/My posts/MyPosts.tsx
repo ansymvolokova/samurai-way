@@ -2,7 +2,20 @@ import React from 'react'
 import {Post} from "./My post/Post";
 import style from './MyPosts.module.css'
 
-export const MyPosts = () => {
+
+export type postDataObject = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+type MyPostsPropsType = {
+    postsData: Array<postDataObject>
+}
+
+export const MyPosts = (props:MyPostsPropsType) => {
+
+    let postsElements = props.postsData.map( (el) =>  <Post message={el.message} likesCount={el.likesCount}/> )
     return (
         <div className={style.postsBlock}>
             <h3>My posts</h3>
@@ -13,8 +26,7 @@ export const MyPosts = () => {
                 </div>
             </div>
         <div>
-            <Post message={'Hi! How are you?'} likesCount={10}/>
-            <Post message={'I learn React'} likesCount={15}/>
+            {postsElements}
         </div>
         </div>
     )
