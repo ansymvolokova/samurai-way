@@ -8,12 +8,10 @@ import {Dialogs, dialogsDataObjectType, messageDataObjectType} from "./component
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {postDataObject} from "./components/Profile/My posts/MyPosts";
+import {stateType} from "./redux/state";
 
 type AppPropsType = {
-    postsData: Array<postDataObject>
-    dialogsData: Array<dialogsDataObjectType>
-    messageData: Array<messageDataObjectType>
+   appState: stateType
 }
 
 function App(props: AppPropsType) {
@@ -23,8 +21,8 @@ function App(props: AppPropsType) {
                 <Header/>
                 <NavBar/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs dialogsData={props.dialogsData} messageData={props.messageData}/>}/>
-                    <Route path="/profile" render={()=><Profile postsData = {props.postsData}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs state={props.appState.messagesPage}/>}/>
+                    <Route path="/profile" render={()=><Profile state = {props.appState.profilePage}/>}/>
                     <Route path="/news" render={()=><News/>}/>
                     <Route path="/music" render={()=><Music/>}/>
                     <Route path="/settings" render={()=><Settings/>}/>
